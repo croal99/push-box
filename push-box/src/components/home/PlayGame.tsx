@@ -6,15 +6,17 @@ import {PushBoxOnChain} from "@/types/PushBoxOnChain.ts";
 let w = 35, h = 35;
 let currentMan: any;         // 当前小人（有四个方向 具体显示哪个图片需要和上下左右方位值关联）
 
+const BASE_IMAGE_URL = "https://croal99.github.io/push-box/push-box/images/";
+
 const oImgs = {
-    "block": "images/block.gif",
-    "wall": "images/wall.png",
-    "box": "images/box.png",
-    "ball": "images/ball.png",
-    "up": "images/up.png",
-    "down": "images/down.png",
-    "left": "images/left.png",
-    "right": "images/right.png",
+    "block": `${BASE_IMAGE_URL}block.gif`,
+    "wall": `${BASE_IMAGE_URL}wall.png`,
+    "box": `${BASE_IMAGE_URL}box.png`,
+    "ball": `${BASE_IMAGE_URL}ball.png`,
+    "up": `${BASE_IMAGE_URL}up.png`,
+    "down": `${BASE_IMAGE_URL}down.png`,
+    "left": `${BASE_IMAGE_URL}left.png`,
+    "right": `${BASE_IMAGE_URL}right.png`,
 }
 
 let images = {

@@ -14,9 +14,11 @@ export default defineConfig(({command, mode}) => {
                     // overlay: false,
                 }
             },
+            base: 'push-box/dist',
             resolve: {
                 alias: {
-                    '@': path.resolve(__dirname, './src')
+                    '@': path.resolve(__dirname, './src'),
+                    '@images': path.resolve(__dirname, './images')
                 }
             }
         }
