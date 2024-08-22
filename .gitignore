@@ -2,11 +2,14 @@
 build
 .idea
 .vscode
+example
+
 # dependencies
 **/node_modules
 .pnpm-store/
 /.pnp
 .pnp.js
+**/pnpm-lock.yaml
 
 # testing
 /coverage
