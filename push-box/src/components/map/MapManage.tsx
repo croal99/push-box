@@ -45,7 +45,7 @@ export function MapManage(
             console.log('end fetch');
         });
 
-    }, []);
+    }, [managerID]);
 
     const init_map_array: number[][] = [
         [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
@@ -95,7 +95,7 @@ export function MapManage(
     }
 
     return (
-        <Box className="back-image">
+        <>
             <Container>
                 <Box px="3">
                     <Flex gap="3">
@@ -117,6 +117,6 @@ export function MapManage(
 
                 </Box>
             </Container>
-        </Box>
+        </>
     )
 }

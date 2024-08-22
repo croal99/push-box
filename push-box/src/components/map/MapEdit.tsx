@@ -1,4 +1,4 @@
-import {Button, Container, Flex} from "@radix-ui/themes";
+import {Button, Container, Flex, Dialog, TextField, Text, Grid, Switch} from "@radix-ui/themes";
 import {useEffect, useState} from "react";
 
 
@@ -11,11 +11,11 @@ export function MapEdit(
     const [map_string, setMapString] = useState('');
     const [mapObject, setMapObject] = useState({});
 
-    useEffect(() => {
-        console.log('map object', map);
-        setMapObject(map)
-        init_map_string(map.data);
-    }, [map]);
+    // useEffect(() => {
+    //     console.log('map object', map);
+    //     setMapObject(map)
+    //     init_map_string(map.data);
+    // }, [map]);
 
     const init_map_string = (map_array: number[][]) => {
         let temp_string = '';
@@ -53,6 +53,78 @@ export function MapEdit(
         onSaveMap();
     }
 
+    return (
+        <>
+            <Dialog.Root>
+                <Dialog.Trigger>
+                    <Button>Edit profile</Button>
+                </Dialog.Trigger>
+
+                <Dialog.Content maxWidth="460px">
+                    <Dialog.Title>Edit map config</Dialog.Title>
+                    <Dialog.Description size="2" mb="4">
+                        Make changes to your map.
+                    </Dialog.Description>
+
+                    <Flex direction="column" gap="6">
+                        <Grid columns="2" gap="6">
+                            <label>
+                                <Text as="div" size="2" mb="1" weight="bold">
+                                    难度等级
+                                </Text>
+                                <TextField.Root
+                                />
+                            </label>
+                            <label>
+                                <Text as="div" size="2" mb="1" weight="bold">
+                                    通关时限
+                                </Text>
+                                <TextField.Root
+                                />
+                            </label>
+                            <label>
+                                <Text as="div" size="2" mb="1" weight="bold">
+                                    重玩次数
+                                </Text>
+                                <TextField.Root
+                                />
+                            </label>
+                            <label>
+                                <Text as="div" size="2" mb="1" weight="bold">
+                                    是否启用
+                                </Text>
+                                <Switch checked={true} data-disable={true}/>
+                            </label>
+
+                        </Grid>
+                        <label>
+                            <Text as="div" size="2" mb="1" weight="bold">
+                                地图数据
+                            </Text>
+                            <textarea rows={18} value={map_string} cols={50}
+                                      onChange={event => {
+                                          const filteredValue = event.target.value.replace(/[\[\] ,]/g, '');
+                                          setMapString(filteredValue);
+                                      }}>
+                            </textarea>
+                        </label>
+                    </Flex>
+
+                    <Flex gap="3" mt="4" justify="end">
+                        <Dialog.Close>
+                            <Button variant="soft" color="gray">
+                                Cancel
+                            </Button>
+                        </Dialog.Close>
+                        <Dialog.Close>
+                            <Button>Save</Button>
+                        </Dialog.Close>
+                    </Flex>
+                </Dialog.Content>
+            </Dialog.Root>
+
+        </>
+    )
 
     return (
         <>

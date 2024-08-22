@@ -57,7 +57,8 @@ export function MapTable(
                             <Table.Cell>{item.time}</Table.Cell>
                             <Table.Cell><Switch checked={item.enable} data-disable={true}/></Table.Cell>
                             <Table.Cell>
-                                <Button onClick={() => edit_map(index, item)}>Edit</Button>
+                                {/*<Button onClick={() => edit_map(index, item)}>Edit</Button>*/}
+                                <MapEdit/>
                             </Table.Cell>
                         </Table.Row>
                     ))}
