@@ -34,6 +34,7 @@ import {UserStatus} from "@/components/home/UserStatus.tsx";
 import {UserMain} from "@/components/home/UserMain.tsx";
 import {useSetup} from "@/hooks/useSetup.ts";
 import {ManagerList} from "@/components/admin/ManagerList.tsx";
+import {MapTable} from "@/components/map/MapTable.tsx";
 
 let level = 0;
 
@@ -146,18 +147,22 @@ export function AdminMain() {
     }
 
     const set_admin_sign_in = async () => {
-        const manager_list = await getManagerList(PLAYGROUND_ID);
-        console.log(manager_list);
-
+        setMangerID('');
         setIsAdminSignIn(true);
     }
 
     const set_manager_id = (id) => {
-        console.log(id);
+        // console.log(id);
         setMangerID(id);
     }
 
     if (isAdminSignIn) {
+        // return (
+        //     <>
+        //         <GameManage
+        //             />
+        //     </>
+        // )
         return (
             <>
                 <Box className="back-image">
@@ -165,16 +170,16 @@ export function AdminMain() {
                         <ManagerList
                             getManagerList={getManagerList}
                             handleSetManagerID={set_manager_id}
-                        />
-                        <MapManage
-                            managerID={managerID}
-                            mapList={mapList}
-                            getMapList={getMapList}
-                            handleCreateMaps={handleCreateMaps}
-                            handleAddMap={handleAddMap}
-                            handleSaveMapData={handleSaveMapData}
                             setBack={setIsAdminSignIn}
                         />
+                        {managerID != '' ? <MapTable
+                                managerID={managerID}
+                                getMapList={getMapList}
+                                handleCreateMaps={handleCreateMaps}
+                                handleAddMap={handleAddMap}
+                                handleSaveMapData={handleSaveMapData}
+                            /> :
+                            <></>}
                     </Grid>
                 </Box>
             </>

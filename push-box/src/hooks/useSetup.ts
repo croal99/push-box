@@ -44,6 +44,12 @@ export const useSetup = () => {
         signAndExecuteTransaction(
             {
                 transaction: tb,
+                options: {
+                    showEvents: true,
+                    showBalanceChanges: true,
+                    showEffects: true,
+                }
+
             },
             {
                 onSuccess: (result) => {

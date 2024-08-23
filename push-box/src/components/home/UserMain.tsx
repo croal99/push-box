@@ -70,7 +70,7 @@ export function UserMain(
         setIsLoading(true);
         try {
             const manager_list = await getManagerList(PLAYGROUND_ID);
-            console.log('manager list', manager_list);
+            // console.log('manager list', manager_list);
             setManagerList(manager_list);
         } catch (error) {
             console.log('error', error)
@@ -123,13 +123,14 @@ export function UserMain(
             <Box className="back-image" pt="4" px="4">
                 <Box pt="4" px="4" style={{background: "var(--gray-a2)", minHeight: 800}}>
                     <Grid columns="5" gap="4">
-                        {managerList.map((item, index) => (
+                        {managerList.map((item, index) =>
+
                             <ManagerInfo
                                 key={index}
                                 manager={item}
                                 handlePlayGame={play_game}
                             />
-                        ))}
+                        )}
 
                     </Grid>
                 </Box>

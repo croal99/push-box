@@ -1,69 +1,96 @@
-import {Button, Flex, Switch, Table} from "@radix-ui/themes";
+import {Box, Button, Card, Container, Flex, Spinner, Switch, Table} from "@radix-ui/themes";
 import {useEffect, useState} from "react";
 import {MapEdit} from "@/components/map/MapEdit.tsx";
+import {MapOnChain} from "@/types/MapOnChain.ts";
+import {useManager} from "@/hooks/useManager.ts";
 
 export function MapTable(
     {
-        map_list,
         managerID,
         handleSaveMapData
     }) {
-
     const [isEditMapData, setIsEditMapData] = useState(false);
     const [mapObject, setMapObject] = useState({});
+    const [mapList, setMapList] = useState<MapOnChain[]>([]);
+    const [isLoading, setIsLoading] = useState(false);
 
-    const edit_map = (index, map_object) => {
-        console.log('edit map object', map_object);
-        setMapObject(map_object);
-        setIsEditMapData(true);
-    }
+    const {getMapList} = useManager()
 
-    const onSaveMapData = () => {
-        setIsEditMapData(false);
-    }
+    const fetchData = async () => {
+        // console.log('fetch data', managerID);
+        if (managerID === '') {
+            return;
+        }
+        setIsLoading(true);
+
+        const maps = await getMapList(managerID);
+        setMapList(maps);
+
+        setIsLoading(false);
+    };
 
     useEffect(() => {
-    }, []);
+        console.log('Map manage');
+        fetchData().then(() => {
+            console.log('end fetch');
+        });
 
-    if (isEditMapData) {
-        return <MapEdit
-            map={mapObject}
-            managerID={managerID}
-            handleSaveMapData={handleSaveMapData}
-            onSaveMap={onSaveMapData}
-        />
+    }, [managerID]);
+
+    if (isLoading) {
+        return (
+            <>
+                <Box className="login-container">
+                    <Card size="3">
+                        <Button>
+                            <Spinner loading>
+                            </Spinner>
+                            Loading Map List...
+                        </Button>
+                    </Card>
+                </Box>
+            </>
+        )
     }
 
     return (
         <>
-            <Table.Root>
-                <Table.Header>
-                    <Table.Row>
-                        <Table.ColumnHeaderCell>序号</Table.ColumnHeaderCell>
-                        <Table.ColumnHeaderCell>难度等级</Table.ColumnHeaderCell>
-                        <Table.ColumnHeaderCell>通关时间</Table.ColumnHeaderCell>
-                        <Table.ColumnHeaderCell>重玩次数</Table.ColumnHeaderCell>
-                        <Table.ColumnHeaderCell>是否启用</Table.ColumnHeaderCell>
-                        <Table.ColumnHeaderCell>操作</Table.ColumnHeaderCell>
-                    </Table.Row>
-                </Table.Header>
+            <Container>
+                <Box px="3" gap="4">
+                    <Card>
+                        <Table.Root>
+                            <Table.Header>
+                                <Table.Row>
+                                    <Table.ColumnHeaderCell>序号</Table.ColumnHeaderCell>
+                                    <Table.ColumnHeaderCell>难度等级</Table.ColumnHeaderCell>
+                                    <Table.ColumnHeaderCell>通关时间</Table.ColumnHeaderCell>
+                                    <Table.ColumnHeaderCell>重玩次数</Table.ColumnHeaderCell>
+                                    <Table.ColumnHeaderCell>是否启用</Table.ColumnHeaderCell>
+                                    <Table.ColumnHeaderCell>操作</Table.ColumnHeaderCell>
+                                </Table.Row>
+                            </Table.Header>
 
-                <Table.Body>
-                    {map_list.map((item, index) => (
-                        <Table.Row key={index}>
-                            <Table.Cell>{index + 1}</Table.Cell>
-                            <Table.Cell>{item.level}</Table.Cell>
-                            <Table.Cell>{item.reset}</Table.Cell>
-                            <Table.Cell>{item.time}</Table.Cell>
-                            <Table.Cell><Switch checked={item.enable} data-disable={true}/></Table.Cell>
-                            <Table.Cell>
-                                {/*<Button onClick={() => edit_map(index, item)}>Edit</Button>*/}
-                                <MapEdit/>
-                            </Table.Cell>
-                        </Table.Row>
-                    ))}
-                </Table.Body>
-            </Table.Root>
+                            <Table.Body>
+                                {mapList.map((item, index) => (
+                                    <Table.Row key={index}>
+                                        <Table.Cell>{index + 1}</Table.Cell>
+                                        <Table.Cell>{item.level}</Table.Cell>
+                                        <Table.Cell>{item.reset}</Table.Cell>
+                                        <Table.Cell>{item.time}</Table.Cell>
+                                        <Table.Cell><Switch checked={item.enable} data-disable={true}/></Table.Cell>
+                                        <Table.Cell>
+                                            <MapEdit
+                                                map={item}
+                                            />
+                                        </Table.Cell>
+                                    </Table.Row>
+                                ))}
+                            </Table.Body>
+                        </Table.Root>
+
+                    </Card>
+                </Box>
+            </Container>
         </>
     )
 }

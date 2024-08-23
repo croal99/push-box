@@ -209,7 +209,8 @@ export function PlayGame(
 
         // 检查是否移动到位
         if (checkFinish()) {
-            if (mapIndex == playMaps.length - 1) {
+            // if (mapIndex == playMaps.length - 1) {
+            if (mapIndex == 1) {
                 console.log('finish')
                 if (moveStepsTotal < playManager.record.step) {
                     setIsUpdate(true);
@@ -217,7 +218,7 @@ export function PlayGame(
                     setIsFinish(true);
                 }
             } else {
-                console.log('pass!!!')
+                console.log('pass!!!', mapIndex)
                 setIsPass(true);
             }
         }
@@ -305,7 +306,7 @@ export function PlayGame(
     }
 
     useEffect(() => {
-        console.log('Play game', playMaps, playMaps.length);
+        // console.log('Play game', playMaps, playMaps.length);
         baseMap = copyMap(playMaps[mapIndex].data);
         currentMap = copyMap(playMaps[mapIndex].data);
 

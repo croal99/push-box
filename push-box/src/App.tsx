@@ -14,32 +14,22 @@ import {
     Inset, Dialog, TextField
 } from "@radix-ui/themes";
 
-import {PlayGame} from "./components/home/PlayGame.tsx";
-import {SiginInBanner} from "./components/home/SiginInBanner.tsx";
+import {useEffect, useState} from "react";
 
+import {usePlayground} from "@/hooks/usePlayground.ts";
 import {usePlayerManage} from "@/hooks/usePlayerManage.ts";
 import {useManager} from "@/hooks/useManager.ts";
-
-
-import {useEffect, useState} from "react";
-import {MapManage} from "@/components/map/MapManage.tsx";
-import {GameManage} from "@/components/setup/GameManage.tsx";
-import {usePlayground} from "@/hooks/usePlayground.ts";
-import {PlayerList} from "@/components/setup/PlayerList.tsx";
-import {JoinGame} from "@/components/home/JoinGame.tsx";
-import {PlayerOnChain} from "@/types/PlayerOnChain.ts";
-import {PushBoxHeader} from "@/components/home/PushBoxHeader.tsx";
-import {UserNavigation} from "@/components/home/UserNavigation.tsx";
-import {UserStatus} from "@/components/home/UserStatus.tsx";
-import {UserMain} from "@/components/home/UserMain.tsx";
 import {useSetup} from "@/hooks/useSetup.ts";
 
-let level = 0;
+
+import {GameManage} from "@/components/setup/GameManage.tsx";
+import {UserMain} from "@/components/home/UserMain.tsx";
+import {PlaygroundOnChain} from "@/types/PlaygroundOnChain.ts";
 
 function App() {
     const account = useCurrentAccount();
     const address = account?.address;
-    const [playground, setPlayground] = useState<PlayerOnChain | boolean>(false);
+    const [playground, setPlayground] = useState<PlaygroundOnChain | boolean>(false);
     const [managerList, setManagerList] = useState<string[] | boolean>(false);
     const [isLoading, setIsLoading] = useState(false);
     const [isSignIn, setIsSignIn] = useState(false);
@@ -162,19 +152,6 @@ function App() {
         />
     }
 
-    if (isAdminSignIn) {
-        return <MapManage
-            managerID={TEST_GAME_CONFIG_OBJECT_ID}
-            mapList={mapList}
-            getMapList={getMapList}
-            handleCreateMaps={handleCreateMaps}
-            handleAddMap={handleAddMap}
-            handleSaveMapData={handleSaveMapData}
-            setBack={setIsAdminSignIn}
-        />;
-    }
-
-    // console.log('application', isSignIn, player);
     return (
         <>
             <Box className="back-image">

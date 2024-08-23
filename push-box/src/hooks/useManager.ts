@@ -118,12 +118,12 @@ export const useManager = () => {
         );
     }
 
-    const handleAddMap = async (pushbox_id, index, map_array) => {
+    const handleAddMap = async (manager_id) => {
         console.log('add map');
-        console.log('address', account?.address);
-        console.log('pushbox id', pushbox_id);
-        console.log('index', index);
-        console.log('data', map_array);
+        // console.log('address', account?.address);
+        // console.log('manager id', manager_id);
+        // console.log('index', index);
+        // console.log('data', map_array);
 
         const tb = new Transaction();
         tb.setSender(account?.address);
@@ -131,8 +131,8 @@ export const useManager = () => {
         tb.moveCall({
             target: `${MARKET_PACKAGE_ID}::market::add_map`,
             arguments: [
-                tb.object(pushbox_id),                             // maps: &mut Maps
-                tb.pure('vector<vector<u8>>', map_array),       // data: vector<vector<u8>>
+                tb.object(manager_id),                             // maps: &mut Maps
+                tb.pure('vector<vector<u8>>', defaultMapArray),       // data: vector<vector<u8>>
             ],
         });
 
@@ -154,14 +154,13 @@ export const useManager = () => {
         );
     }
 
-    const getMapList = async (pushbox_id:string) => {
-        setIsLoading(true);
-        console.log('get map list', pushbox_id);
+    const getMapList = async (manager_id:string) => {
+        // console.log('get map list', manager_id);
         const tempList = [];
 
         // 读取列表
         const res = await suiClient.getObject({
-            id: pushbox_id,
+            id: manager_id,
             options: {
                 showContent: true,
             }
@@ -174,12 +173,10 @@ export const useManager = () => {
             // console.log('item', item);
             const {fields} = item;
             const map = fields as unknown as MapOnChain;
-            map.manager_id = pushbox_id;
+            map.manager_id = manager_id;
             map.index = parseInt(index);
             tempList.push(map);
         }
-
-        setIsLoading(false);
 
         return tempList;
     }

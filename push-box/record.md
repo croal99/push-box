@@ -59,3 +59,30 @@ txb.transferObjects([mintMany[0], mintMany[1]], txb.pure(address));
 
 ```
 
+
+```typescript
+        signAndExecuteTransaction(
+            {
+                transaction: tb,
+                options: {
+                    // showEvents: true,
+                    // showBalanceChanges: true,
+                    showEffects: true,
+                }
+            },
+            {
+                onSuccess: (tx) => {
+                    suiClient.waitForTransaction((tx) => {
+                        
+                    })
+
+                    setDigest(result.digest);
+                },
+                onError: (result) => {
+                    console.log('trans error', result.message);
+                    setMessage(result.message);
+                }
+            },
+        );
+
+```
