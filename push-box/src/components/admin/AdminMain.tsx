@@ -157,12 +157,12 @@ export function AdminMain() {
     }
 
     if (isAdminSignIn) {
-        // return (
-        //     <>
-        //         <GameManage
-        //             />
-        //     </>
-        // )
+        return (
+            <>
+                <GameManage
+                    />
+            </>
+        )
         return (
             <>
                 <Box className="back-image">
@@ -193,14 +193,17 @@ export function AdminMain() {
                 <Box className="login-container">
                     <Card className="login-form" style={{background: "var(--gray-a1)", maxWidth: 400}}>
                         <Flex direction="column" gap="3">
-                            <Text as="div" weight="bold" size="3" mb="1">
-                                Playground on Sui Manage System
+                            <Text as="div" weight="bold" size="3" mb="1" align={'center'}>
+                                SuiPlayground
                             </Text>
                             {account ?
                                 <Grid columns="1" gap="2">
                                     <Button onClick={set_admin_sign_in}>Enter Administrator System</Button>
                                 </Grid>
                                 : <ConnectButton/>}
+                            <Text size="1" mb="1" align={'center'}>
+                                Version (20240824.main)
+                            </Text>
                         </Flex>
                     </Card>
                 </Box>

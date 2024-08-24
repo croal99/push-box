@@ -14,6 +14,14 @@ export function GameManage({}) {
         handleInitManager("Sokoban", "Level", "https://img1.baidu.com/it/u=1175345804,745978986&fm=253&fmt=auto&app=138&f=JPG?w=500&h=500", handleSuccess, handleError);
     }
 
+    const handleSuccess = (result) => {
+        console.log('success', result)
+    }
+
+    const handleError = (result) => {
+        console.log('error', result)
+    }
+
     const init_map = () => {
         handleInitMaps()
     }

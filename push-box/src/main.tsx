@@ -21,7 +21,7 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
         accentColor="grass"
     >
       <QueryClientProvider client={queryClient}>
-        <SuiClientProvider networks={networkConfig} defaultNetwork="testnet">
+        <SuiClientProvider networks={networkConfig} defaultNetwork="mainnet">
           <WalletProvider autoConnect>
               <App />
           </WalletProvider>
