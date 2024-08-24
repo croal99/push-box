@@ -42,6 +42,6 @@ SuiPlayground是一款建立在区块链上的一个智能合约游戏资源管�
 
 ![img.png](images/image7.png)
 
-## Demo website （需要在Sui的测试网中使用！）
+## Demo website - 需要在Sui的测试网中使用
 [玩家端](https://croal99.github.io/push-box/push-box/dist/)
 [管理端](https://croal99.github.io/push-box/push-box/dist/admin/)
