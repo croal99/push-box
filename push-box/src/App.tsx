@@ -158,7 +158,7 @@ function App() {
                 <Box className="login-container">
                     <Card className="login-form" style={{background: "var(--gray-a1)", maxWidth: 400}}>
                         <Flex direction="column" gap="3">
-                            <Text as="div" weight="bold" size="3" mb="1">
+                            <Text as="div" weight="bold" size="3" mb="1" align={'center'}>
                                 Sokoban
                             </Text>
                             <Text>
@@ -175,6 +175,9 @@ function App() {
                                     }}>Let's Play on Sui</Button>
                                 </Grid>
                                 : <ConnectButton/>}
+                            <Text size="1" mb="1" align={'center'}>
+                                Version (20240824.test)
+                            </Text>
                         </Flex>
                     </Card>
                 </Box>
