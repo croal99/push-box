@@ -28,6 +28,7 @@ SuiPlaygroud平台分别提供两个Web3.0应用给游戏设计者和游戏玩�
 ## 游戏管理端 [demo](https://croal99.github.io/push-box/push-box/dist/admin/)
 
 ### 游戏管理列表
+* 不同的开发者只能管理自己游戏数据
 
 ![img.png](images/image6.png)
 
