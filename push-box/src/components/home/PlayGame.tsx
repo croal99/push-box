@@ -209,8 +209,7 @@ export function PlayGame(
 
         // 检查是否移动到位
         if (checkFinish()) {
-            // if (mapIndex == playMaps.length - 1) {
-            if (mapIndex == 1) {
+            if (mapIndex == playMaps.length - 1) {
                 console.log('finish')
                 if (moveStepsTotal < playManager.record.step) {
                     setIsUpdate(true);
